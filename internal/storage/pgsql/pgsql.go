@@ -2,6 +2,7 @@ package pgsql
 
 import (
 	"cinema/internal/config"
+	"cinema/internal/models"
 	"fmt"
 
 	"gorm.io/driver/postgres"
@@ -41,6 +42,8 @@ func New(cfg *config.Config) *Storage {
 	if err := sqlDB.Ping(); err != nil {
 		panic("Failed to ping database: %w" + err.Error())
 	}
+
+	db.AutoMigrate(&models.Todo{})
 
 	return &Storage{
 		DB: db,
