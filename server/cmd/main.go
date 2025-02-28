@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"server/internal/config"
 	"server/internal/db"
@@ -12,7 +11,6 @@ func main() {
 	config.LoadConfig()
 	db.InitDB()
 
-	s := server.NewServer()
-	fmt.Println("Server running on port", config.Cfg.ServerPort)
-	log.Fatal(s.Start())
+	s := server.GetServer()
+	log.Fatal(s.Start(server.ServerArgs{DB: db.DB}))
 }

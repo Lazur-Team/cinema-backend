@@ -1,0 +1,7 @@
+Как работать с GQL и GORM?
+Шаг	Что делаем?	Пример файла
+1	Создаём GraphQL-тип	schema.graphqls
+2	Генерируем gqlgen код	go run -mod=mod github.com/99designs/gqlgen generate
+3	Создаём GORM-модель вручную	internal/models/movie.go
+4	Не трогаем models_gen.go (используется gqlgen)	internal/graph/model/models_gen.go
+5	Настраиваем резолвер	internal/graph/movie.resolvers.go
