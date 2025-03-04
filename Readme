@@ -1,0 +1,64 @@
+Cinema-Tver
+
+This project is a cinema aggregator for Tver, designed to collect and serve movie-related data. The project consists of two main components:
+
+Server: Handles API requests, database interactions, and business logic.
+
+Parser: Scrapes and processes movie data from various sources.
+
+🚀 Tech Stack
+
+Backend: Go, GORM, GraphQL
+
+Database: PostgreSQL
+
+Infrastructure: Docker, Docker Compose
+
+📂 Project Structure
+
+.
+├── server/         # Backend application
+├── parser/         # Data scraping and processing
+├── .env            # Environment variables
+├── docker-compose.yml # Docker configuration
+└── Makefile        # Project automation commands
+
+🛠️ Setup & Installation
+
+1️⃣ Prerequisites
+
+Ensure you have the following installed:
+
+Docker
+
+Docker Compose
+
+2️⃣ Clone the Repository
+
+git clone https://github.com/your-repo/cinema-tver.git
+cd cinema-tver
+
+3️⃣ Configure Environment Variables
+
+Create a .env file in the root/server directory and set the required values.
+
+4️⃣ Start the Services
+
+To start the project, run:
+
+make run-server
+
+This will:
+
+Start the backend server
+
+Start the PostgreSQL database
+
+🤝 Contributing
+
+Feel free to open issues or submit pull requests to improve the project.
+
+📜 License
+
+This project is licensed under the MIT License.
+
