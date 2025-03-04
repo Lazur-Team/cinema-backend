@@ -23,7 +23,7 @@ func LoadConfig() {
 		DBUser:     viper.GetString("DB_USER"),
 		DBPass:     viper.GetString("DB_PASS"),
 		DBName:     viper.GetString("DB_NAME"),
-		DBHost:     viper.GetString("DB_HOST"),
-		DBPort:     viper.GetString("DB_PORT"),
+		DBHost:     viper.GetString("DB_HOST_CONTAINER"),
+		DBPort:     viper.GetString("DB_PORT_CONTAINER"),
 	}
 }
