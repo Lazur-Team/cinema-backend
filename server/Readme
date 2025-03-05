@@ -1,0 +1,127 @@
+Cinema-Tver Server
+
+The server is responsible for handling API requests, managing the database, and providing GraphQL endpoints.
+
+🚀 Tech Stack
+
+Language: Go
+
+Frameworks & Libraries: GORM, GraphQL
+
+Database: PostgreSQL
+
+📂 Project Structure
+
+server/
+├── internal/
+│   ├── db/         # Database connection
+│   ├── migrations/ # Database migrations
+│   ├── models/     # GORM models
+│   ├── graphql/    # GraphQL resolvers & schema
+│   └── config/     # Configuration handling
+├── server/         # Server logic
+├── main.go         # Server entry point
+└── go.mod          # Dependencies
+
+🛠️ Setup & Running
+
+1️⃣ Configure Environment Variables
+
+Ensure .env contains the correct values:
+
+SERVER_PORT=8080
+
+DB_USER=cinema-tver
+DB_PASS=cinema-tver
+DB_NAME=cinema-tver
+DB_HOST=db
+DB_PORT=5432
+DATABASE_URL=postgres://$(DB_USER):$(DB_PASS)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
+
+2️⃣ Run the Server
+
+Run this command from the root directory:
+
+make run-server
+
+3️⃣ Run Migrations
+
+make migrate-up
+
+🔍 Working with GORM
+
+The server uses GORM for database interactions. Example model:
+
+type Movie struct {
+    ID          uuid.UUID `gorm:"type:uuid;default:gen_random_uuid();primaryKey"`
+    Title       string    `gorm:"not null"`
+    Description *string
+    ReleaseYear int
+    CreatedAt   time.Time      `gorm:"autoCreateTime"`
+    UpdatedAt   time.Time      `gorm:"autoUpdateTime"`
+    DeletedAt   gorm.DeletedAt `gorm:"index"`
+}
+
+Performing CRUD Operations
+
+// Create a new movie
+db.Create(&Movie{Title: "Inception", ReleaseYear: 2010})
+
+// Find a movie by ID
+var movie Movie
+db.First(&movie, "id = ?", someID)
+
+// Update a movie
+db.Model(&movie).Update("Title", "Interstellar")
+
+// Delete a movie
+db.Delete(&movie)
+
+🔍 GraphQL API
+
+The project exposes a GraphQL API for querying movie data. Example:
+
+Query
+
+query {
+  movies {
+    id
+    title
+    releaseYear
+  }
+}
+
+Mutation
+
+mutation {
+  addMovie(input: {title: "The Matrix", releaseYear: 1999}) {
+    id
+    title
+  }
+}
+
+GraphQL endpoint:
+
+http://localhost:8080/graphql
+
+🔧 Useful Commands
+
+make run-server      # Start the server
+make migrate-up      # Apply database migrations
+make migrate-down    # Rollback last migration
+make migrate-create name=create_movies_table  # Create a new migration file
+
+🛠️ Development Notes
+
+Inside container: The server connects to db:5432.
+
+Ports mapping: PostgreSQL inside Docker uses 5432, but it's exposed as 5433 locally.
+
+🤝 Contributing
+
+Feel free to open issues or submit pull requests to improve the server.
+
+📜 License
+
+This project is licensed under the MIT License.
+
